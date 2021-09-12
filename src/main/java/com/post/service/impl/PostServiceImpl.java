@@ -21,6 +21,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public Post createPost(Post post) {
 
+		if (postRepository.existsByTitle(post.getTitle())) {
+			throw new ResourceNotFoundException("title",
+					"The title '" + post.getTitle() + "' is already taken, Please give some other title!.");
+		}
+
 		Set<Comment> comments = post.getComment();
 		if (comments.size() > 0) {
 			comments.forEach(com -> com.setPost(post));

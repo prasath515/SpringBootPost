@@ -68,7 +68,7 @@ class ControllerAdviceErrorHandling {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	ResponseEntity<Object> onResourceNotFoundException(ResourceNotFoundException e) {
-
+		
 		customError.setMessage(e.getMessage());
 
 		return new ResponseEntity<Object>(customError, HttpStatus.NOT_FOUND);
